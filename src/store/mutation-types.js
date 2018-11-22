@@ -1,0 +1,3 @@
+export const SAVE_ATTENTION='SAVE_ATTENTION'
+export const  SAVE_REGIST='SAVE_REGIST'
+export const SAVE_UP='SAVE_UP'

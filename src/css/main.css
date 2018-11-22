@@ -1,0 +1,126 @@
+/* */
+body{
+  width: 100%;
+  height: 100%;
+}
+
+span[class^="icon"]{
+	color:#BF5102;
+  font-size:2rem;
+}
+.icon-warning[class^="icon"],.icon-like[class^="icon"] {
+  color:#F4DFB4;
+  font-size:1.4rem;
+}
+
+#app{
+  background-color:#FBF1CA;
+}
+
+	
+.back_main{
+	height: 100%;
+    padding: 0 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color:#BF5102;
+}
+.back_main_regist,.back_main_attention,.back_main_enroll{
+   justify-content: space-around;
+   font-size: 1.4rem;
+   letter-spacing: 1px;
+  }
+  .back_main_enroll{
+    justify-content: space-between;
+  }
+  .input_a{
+    background-color: #EEC350;
+  }
+  .input_a:hover, .reg_color{
+     background-color:#d98613;
+    }{
+    background-color:#d98613
+  }
+.back_main_regist>a,.back_main_attention>a{
+  position: absolute;
+  left:4%;
+}
+  .icon-angle-left[class^="icon"]{
+    font-size: 2.4rem;
+  }
+  .worklist_wrap{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  /*height: 100vh;*/
+  position: relative;
+  z-index: 1;
+  will-change: scroll-position;
+  padding-top:4.6rem;
+}
+
+.com_btn1,.com_btn2{
+    border: 0;
+    border-radius: 2rem;
+    flex-grow: 1;
+    padding: 0 1rem;
+    font-size:1.2rem;
+}
+.com_btn1{
+   color:#BF5102;
+   background-color:#EEC350;
+}
+.com_btn1:hover{
+   background-color:#BF5102;
+   color:#fff;
+}
+.com_btn2{
+   color:#fff;
+   background-color:#BF5102;
+   height: 3rem;
+   line-height: 3rem;
+}
+.com_btn2:hover{
+   background-color:#EEC350;
+   
+}
+#head-top{
+  max-width:600px;
+}
+/*alert*/
+.alert_wrap,.inform_wrap{
+   width: 100%;
+    height: 100vh;
+    background-color: RGBA(0,0,0,.2);
+   /*  border-radius: 1rem; */
+    position: fixed;
+    z-index: 101;
+    color: #BF5102;
+    font-size: 1.2rem;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+}
+.alert_wrap_in,.inform_wrap_in{
+    width: 86%;
+    height: 20vh;
+    align-self: center;
+    background: #fff;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+}
+/*alert end*/
+/*inform begin*/
+.inform_wrap_in{
+height:28vh;
+}
+.inform_wrap{
+
+}
+/*inform end*/
