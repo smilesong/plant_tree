@@ -24,6 +24,7 @@
 				</div>
 			</li>
 		</ul>
+		<p  class="noContTips" v-if="isShowTip">没有匹配的内容哦！</p>
 		 <!-- tips -->
 		    <alert   :alert-flag="isAlertFlag"  :cxt="alertCxt" v-on:onTap="changeAlert">
 		    </alert> 
@@ -64,15 +65,18 @@ export default{
   		 id:0,//作品id
   		 isAlertFlag:false,
          alertCxt:"",
-         tipsInform:0
+         tipsInform:0,
+          sFlag:true,
+         isShowTip:false
   		}
   	},
-  	props:['zanFlag'],
+  	props:['zanFlag','throttleFlag','searchText'],
   	computed:{
 
   	},
   	watch:{
   		zanFlag:'initData',
+  		searchText:'searchData'
   	},
   	mounted(){
   		this.initData();
@@ -102,13 +106,38 @@ export default{
        }).catch(
        	reason=> console.log(reason.message)
        	);
-
-       
       /* this.$nextTick(function () {
        	console.log(this.zanFlag) // => '更新完成'
       })*/
-      
    },
+   // 测试模糊查询和函数节流
+    async searchData(){
+    	console.log("555555")
+    	if(this.sFlag){
+    		this.sFlag=false;
+    	    let response= await workList().then(res=>{
+    	    let arr=[...res.data].reverse()
+    		if(this.searchText.length>0){
+    			//let patt=new RegExp("["+this.searchText+"]+","ig");
+    			let patt=new RegExp("("+this.searchText+")+","ig");
+    			this.workListArray=arr.filter((item)=>{
+	        	return patt.test(item.nickName )||patt.test(item.id)
+	          });
+    		}else{
+    			this.workListArray=arr;
+    		}
+	        this.sFlag=true;
+	        this.workListArray.length>0?(this.isShowTip=false):(this.isShowTip=true);
+       	    console.log("i'm updated")
+        	console.log(this.workListArray) // => '更新完成'
+	       }).catch(// new Promise().then().catch() then 是resovle状态的回调函数。
+	       	reason=> console.log(reason.message)
+	       	  );
+    	}else{
+    		console.log('66666666')
+    		return;
+    	}
+    },
    informCN(id){  //举报弹窗出现
    	this.informFlag=true;
    	this.id=id;
@@ -159,6 +188,12 @@ export default{
 }
 .zan_color,.zan_color2{
 	color:@color3;
+}
+.noContTips{
+	text-align: center;
+    margin: 2rem auto;
+    font-size: 1rem;
+    color: @color3;
 }
 /* .zan_color2{
 	color:rgb(162, 70, 4);

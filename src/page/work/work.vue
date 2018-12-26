@@ -3,7 +3,8 @@
 	<head-top>
 		<div slot="work" class="back_main back_main_work">
 			<router-link :to="'/home'"><span class="icon icon-home3"></span></router-link>
-			<span><input type="text" />
+			<span>
+        <input type="text" placeholder="试着输入名字或作品id" v-model="searchText" v-on:input="fuzzySearch"/>
 				<span class="icon-search"></span>
 			</span>
 			<span class="icon icon-user" @click="judgeState"></span>
@@ -11,7 +12,7 @@
 		
 	</head-top>	
 	<!-- 作品列表 -->
-	<work-list    :zan-flag="zanFlag"  v-on:zanCN="zanAct">
+	<work-list  :search-text="searchText"  :zan-flag="zanFlag" :throttle-flag="throttleFlag" v-on:zanCN="zanAct" >
 	</work-list>
     <!-- tips -->
     <alert   :alert-flag="isAlertFlag"  :cxt="alertCxt" v-on:onTap="changeAlert">
@@ -32,8 +33,10 @@ import {zanResult} from 'src/service/getData'
 	 data(){
 	 	return {
            zanFlag:false,
+           throttleFlag:true,//模糊查询标识
            isAlertFlag:false,
            alertCxt:"",
+           searchText:"",//模糊查询的内容
            obj:{
             a:1
            }
@@ -80,7 +83,26 @@ import {zanResult} from 'src/service/getData'
          /*提示框*/
           changeAlert(){
             this.isAlertFlag=false;
-           }
+           },
+           /* 模糊查询*/
+        fuzzySearch(){
+           console.log(this.searchText)
+           this.throttle()
+        },
+        throttle(){
+          if(this.throttleFlag){
+             console.log("3333")
+             this.throttleFlag=false;
+            window.setTimeout(()=>{
+              this.throttleFlag=true;
+               console.log("4444")
+            },1000)
+          }else{
+             console.log("222")
+           return false;
+          }
+        }//
+
     }
 }
 </script>
